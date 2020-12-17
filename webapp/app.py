@@ -1,8 +1,40 @@
-import requests
-from flask import jsonify
-from flask import Flask, render_template
+import requests 
+from flask import Flask, render_template, jsonify
+
+
 app = Flask(__name__)
 
+def githubjobs():
+    page = 1
+    more_pages = True
+    title = 'title'
+    company = 'company'
+    url = 'url'
+    location = 'location'
+    all_data = []
+
+    while more_pages:
+
+        r= requests.get(f'https://jobs.github.com/positions.json?page={page}')
+
+        for HPS in r.json():
+            results = {
+            "Company" : HPS[company],
+            "Title": HPS[title],
+            "Location": HPS[location],
+             "Url": HPS[url]
+
+            }
+            all_data.append(results)
+
+        nextpage = requests.get(f'https://jobs.github.com/positions.json?page={page+1}')
+
+        if len(nextpage.json()) == 0:
+            more_pages = False
+
+
+        page+=1 
+    return all_data
 
 
 @app.route('/')
@@ -19,40 +51,10 @@ def about():
 
 @app.route('/jobs/')
 def jobs():
+    githubjob= githubjobs()
 
-    return render_template('jobs.html')
+    return render_template('jobs.html', githubjob= githubjob)
 
-        # page = 1
-        # more_pages = True
-        # title = 'title'
-        # company = 'company'
-        # url = 'url'
-        # location = 'location'
-        # all_data = []
-
-        # while more_pages:
-
-        #     r= requests.get(f'https://jobs.github.com/positions.json?page={page}')
-
-        #     for HPS in r.json():
-        #         results = {
-        #         "Company" : HPS[company],
-        #         "Title": HPS[title],
-        #         "Location": HPS[location],
-        #          "Url": HPS[url]
-
-        #         }
-        #         all_data.append(results)
-
-        #     nextpage = requests.get(f'https://jobs.github.com/positions.json?page={page+1}')
-
-        #     if len(nextpage.json()) == 0:
-        #         more_pages = False
-
-
-        #     page+=1    
-
-        # return jsonify(all_data) 
             
 
 
