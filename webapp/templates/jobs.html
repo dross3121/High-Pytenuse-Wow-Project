@@ -3,8 +3,8 @@
  {% extends "layout.html" %}
  {% block content %}
    <div class="jobs">
-     <h1>About me</h1>
-     <p>This is a list of aggregated jobs using an API for Githubjobs.com and Webscrapping Indeed.com.</p>
+     <h1>About Jobs</h1>
+     <p>This section of the Hypytenuse Webapp is of Tech jobs. The jobs section is catergorized by Company, Job title, Location, and Url produced by aggreagting using an API for Githubjobs.com and Webscrapping Indeed.com.</p>
 	 <table border = 1>
 	 	<tr>
 		   <th> Company </th>
@@ -15,9 +15,9 @@
 		{% for job in githubjob %}
 	    </tr>
 	    	<th> {{job['Company']}} </th>
-		   	<th> {{job['Title']}}</th>
+		   	<th> {{job['Title']}} </th>
 		    <th>  {{job['Location']}} </th>
-		    <th> {{job['Url']}}</th>
+		    <th><a href= "{{job['Url']}}" target=" _blank">{{job['Url']}}</a> </th>
 		</tr>
 		{% endfor %}
 	</table>

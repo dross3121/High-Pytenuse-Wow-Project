@@ -27,7 +27,7 @@ def githubjobs():
             }
             all_data.append(results)
 
-        nextpage = requests.get(f'https://jobs.github.com/positions.json?page={page+1}')
+        nextpage= requests.get(f'https://jobs.github.com/positions.json?page={page+1}')
 
         if len(nextpage.json()) == 0:
             more_pages = False
