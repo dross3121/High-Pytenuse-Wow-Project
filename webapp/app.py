@@ -1,4 +1,5 @@
-import requests 
+import csv
+import requests
 from flask import Flask, render_template, jsonify
 
 
@@ -36,6 +37,16 @@ def githubjobs():
         page+=1 
     return all_data
 
+def parseCSVFile():
+    data = []
+    with open('merged.csv', newline='') as f:
+        reader = csv.DictReader(f)
+        print('reading file')
+        for row in reader:
+            data.append(row)
+        return data
+
+
 
 @app.route('/')
 def home():
@@ -51,9 +62,9 @@ def about():
 
 @app.route('/jobs/')
 def jobs():
-    githubjob= githubjobs()
+    print(parseCSVFile())
 
-    return render_template('jobs.html', githubjob= githubjob)
+    return render_template('jobs.html', githubjob= parseCSVFile())
 
             
 

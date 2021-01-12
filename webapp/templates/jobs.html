@@ -15,9 +15,9 @@
 		{% for job in githubjob %}
 	    </tr>
 	    	<th> {{job['Company']}} </th>
-		   	<th> {{job['Title']}} </th>
+		   	<th> {{job['Job Title']}} </th>
 		    <th>  {{job['Location']}} </th>
-		    <th><a href= "{{job['Url']}}" target=" _blank">{{job['Url']}}</a> </th>
+		    <th><a href= "{{job['Job Url']}}" target=" _blank">{{job['Job Title']}}</a> </th>
 		</tr>
 		{% endfor %}
 	</table>
