@@ -5,6 +5,7 @@ import csv
 from time import sleep
 from random import randint
 from datetime import datetime
+import pprint
 
 headers = {
     'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -20,12 +21,20 @@ headers = {
 }
 
 def get_url(position, location):
-        template = 'https://www.indeed.com/jobs?q={}&l={}'
-        url = template.format(position, location)
-        return url
+
+    '''
+    parses indeed and returns the (position, location)
+
+    '''
+    template = 'https://www.indeed.com/jobs?q={}&l={}'
+    url = template.format(position, location)
+    return url
 
 def get_record(card):
-    '''Extract job date from a single record '''
+    '''
+    Extract job data from a single record
+
+    '''
     atag = card.h2.a
     try:
         job_title = atag.get('title')
@@ -39,25 +48,14 @@ def get_record(card):
         location = card.find('div', 'recJobLoc').get('data-rc-loc')
     except AttributeError:
         location = ''
-    try:
-        job_summary = card.find('div', 'summary').text.strip()
-    except AttributeError:
-        job_summary = ''
-    try:
-        post_date = card.find('span', 'date').text.strip()
-    except AttributeError:
-        post_date = ''
-    try:
-        salary = card.find('span', 'salarytext').text.strip()
-    except AttributeError:
-        salary = ''
+    
     
     extract_date = datetime.today().strftime('%Y-%m-%d')
     job_url = 'https://www.indeed.com' + atag.get('href')
     
-    return (job_title, company, location, job_summary, salary, post_date, extract_date, job_url)
+    return (job_title, company, location, job_url)
 
-def main(position, location):
+def main(position, location, limit=1):
     # Run the main program reouting
     records = []  # creating the record list
     url = get_url(position, location)  # create the url while passing in the position and location.
@@ -74,14 +72,15 @@ def main(position, location):
 
         try:
             url = 'https://www.indeed.com' + soup.find('a', {'aria-label': 'Next'}).get('href')
-            delay = randint(1, 10)
-            sleep(delay)
+            #delay = randint(1, 10)
+            #sleep(delay)
         except AttributeError:
             break
 
+         
     with open('results.csv', 'w', newline='', encoding='utf-8') as f:
-        writer = csv.writer(f)
-        writer.writerow(['Job Title', 'Company', 'Location', 'Summary', '   ', 'Post Date', 'Salary', 'Job Url'])
-        writer.writerows(records)
+       writer = csv.writer(f)
+       writer.writerow(['Job Title', 'Company', 'Location', 'Job Url'])
+       writer.writerows(records)
 
 main('python', 'New York')
