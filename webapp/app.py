@@ -1,4 +1,5 @@
-import requests 
+import csv
+import requests
 from flask import Flask, render_template, jsonify
 import csv
 
@@ -44,7 +45,6 @@ def parseCSVFile():
     returns data from merged.csv flat file database 
     '''
 
-
     data =[]
 
     with open('merged.csv', newline='') as f:
@@ -70,11 +70,14 @@ def about():
 
 @app.route('/jobs/')
 def jobs():
+
     # githubjob= githubjobs()
     print(parseCSVFile())
     '''
     Dispalys data from merged.csv
     '''
+
+    print(parseCSVFile())
 
     return render_template('jobs.html', githubjob= parseCSVFile())
 
