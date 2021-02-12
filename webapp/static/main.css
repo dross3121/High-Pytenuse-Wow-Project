@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #444;
+  color: #500;
 }
 
 /*
@@ -51,7 +51,7 @@ div.home {
 
 div.jobs {
   padding: 10px 0 30px 0;
-  background-color: #E6E6FA;
+  background-color: #8282fb;
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;        

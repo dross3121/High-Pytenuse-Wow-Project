@@ -1,48 +1,13 @@
 import csv
-import requests
-from flask import Flask, render_template, jsonify
-import csv
+from flask import Flask, render_template
+
 
 app = Flask(__name__)
-
-# def githubjobs():  
-
-
-#     page = 1
-#     more_pages = True
-#     title = 'title'
-#     company = 'company'
-#     url = 'url'
-#     location = 'location'
-#     all_data = []
-
-#     while more_pages:
-
-#         r= requests.get(f'https://jobs.github.com/positions.json?page={page}')
-
-#         for HPS in r.json():
-#             results = {
-#             "Company" : HPS[company],
-#             "Title": HPS[title],
-#             "Location": HPS[location],
-#              "Url": HPS[url]
-
-#             }
-#             all_data.append(results)
-
-#         nextpage= requests.get(f'https://jobs.github.com/positions.json?page={page+1}')
-
-#         if len(nextpage.json()) == 0:
-#             more_pages = False
-
-
-#         page+=1 
-#     return all_data
 
 
 def parseCSVFile():
     ''' 
-    returns data from merged.csv flat file database 
+    returns data from merged.csv flat file using the with open function to render the data from a csv file 
     '''
 
     data =[]
@@ -58,27 +23,25 @@ def parseCSVFile():
 
 @app.route('/')
 def home():
-
+    '''
+    returns idex page template
+    '''
     return render_template('home.html') 
 
 
 @app.route('/about/')
 def about():
-
+    '''
+    returns about page template
+    '''
     return render_template('about.html')
 
 
 @app.route('/jobs/')
 def jobs():
-
-    # githubjob= githubjobs()
-    print(parseCSVFile())
     '''
-    Dispalys data from merged.csv
+    Returns data from merged.csv formatted with columns job title,company, location, and url  
     '''
-
-    print(parseCSVFile())
-
     return render_template('jobs.html', githubjob= parseCSVFile())
 
             
