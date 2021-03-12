@@ -1,9 +1,10 @@
 import csv
 from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
 
 
 app = Flask(__name__)
-
+Bootstrap(app)
 
 def parseCSVFile():
     ''' 
@@ -45,7 +46,6 @@ def jobs():
     return render_template('jobs.html', githubjob= parseCSVFile())
 
             
-
 
 
 if __name__ == '__main__':

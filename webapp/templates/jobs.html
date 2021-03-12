@@ -1,11 +1,12 @@
 <html>
   <body>
- {% extends "layout.html" %}
+ {% extends "base.html" %}
  {% block content %}
    <div class="jobs">
      <h1>About Jobs</h1>
-     <p>This section of the Hypytenuse Webapp is of Tech jobs. The jobs section is catergorized by Company, Job title, Location, and Url produced by aggreagting using an API for Githubjobs.com and Webscrapping Indeed.com.</p>
-	 <table border = 1>
+     <h2>This section of the Hy-py Webapp is a listing of Tech jobs. The jobs section is catergorized by Company, Job title, Location, and Url which where produced by an API request for Githubjobs.com and Webscrapping Indeed.com.</h2>
+	 <table border = 20>
+	 	<caption>Job Listing</caption>
 	 	<tr>
 		   <th> Company </th>
 		   <th> Title </th>
@@ -13,7 +14,7 @@
 		   <th> Url  </th>
 	    </tr>
 		{% for job in githubjob %}
-	    </tr>
+	    <tr>
 	    	<th> {{job['Company']}} </th>
 		   	<th> {{job['Job Title']}} </th>
 		    <th>  {{job['Location']}} </th>
