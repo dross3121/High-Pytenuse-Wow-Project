@@ -1,0 +1,33 @@
+<html>
+  <body>
+ {% extends "layout.html" %}
+ {% block content %}
+   <div class="jobs">
+     <h1>Tech Jobs</h1>
+     <p>This section of the Hypytenuse Webapp is where the major concepts come together.  The application of code implemented was originally formed with the idea of learning how to code and using various methods to aggregate Tech industry related jobs. 
+     <p>The jobs section is catergorized by 4 fields: <b>Company name</b>, <b>Job title</b>, <b>Location</b>, and <b>URL. </b> <p> These fields were aggreated by using the Requests Library and Beautiful Soup for HTML.  Additionally, we also utilized an API for Githubjobs.com. By doing so, we were faced with handling both structured and unstructured data and the integration of each.  </p>
+     
+     
+     
+	 <table border = 1>
+	 	<tr>
+		   <th> Company </th>
+		   <th> Title </th>
+		   <th> Location  </th>
+		   <th> Url  </th>
+	    </tr>
+		{% for job in githubjob %}
+	    </tr>
+	    	<th> {{job['Company']}} </th>
+		   	<th> {{job['Job Title']}} </th>
+		    <th>  {{job['Location']}} </th>
+		    <th><a href= "{{job['Job Url']}}" target=" _blank">{{job['Job Title']}}</a> </th>
+		</tr>
+		{% endfor %}
+	</table>
+   </div>
+ {% endblock %}
+  </body>
+</html>
+
+
